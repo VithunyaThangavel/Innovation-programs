@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event delegation </title>
+</head>
+<body>
+    <ul id="list">
+        <li>product-1</li>
+        <li>product-2</li>
+    </ul>
+
+    <button id="addproduct">Add Product</button>
+<script>
+    const list=document.getElementById("list");
+    const addproduct=document.getElementById("addProduct");
+    let count=3;
+
+    list.addEventListener('click',(event)=>{
+        if(event.target.tagname ==='LI'){
+            console.log(`You clicked:${event.targer.textcontent}`);
+        }
+
+    });
+
+    //Add new products
+    addProduct.addEventListener('click',()=>{
+        const newProduct=document.createElement('li');
+        newProduct.textContent=`Product-${count++}`;
+        list.appendchild(newProduct);
+    });
+
+</script>
+</body>
+</html>

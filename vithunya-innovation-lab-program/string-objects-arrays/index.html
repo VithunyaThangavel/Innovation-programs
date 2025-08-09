@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Text Analyzer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+    textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+      background-color: #5f9ea0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #53868b;
+    }
+    pre {
+      background: #fff;
+      padding: 10px;
+      border: 1px solid #ccc;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Mini Text Analyzer</h2>
+  <textarea id="ParagraphInput" placeholder="Enter a paragraph" cols="60" rows="6"></textarea><br>
+  <button onclick="AnalyzerText()">Analyze</button>
+  <pre id="output"></pre>
+
+  <script>
+    function AnalyzerText() {
+      const text = document.getElementById("ParagraphInput").value;
+
+      const totalChars = text.length;
+      const words = text.match(/\b\w+\b/g) || [];
+      const totalWords = words.length;
+      const totalSentences = (text.match(/[.!?]/g) || []).length;
+
+      const lowerWords = words.map(w => w.toLowerCase());
+      const uniqueWords = [...new Set(lowerWords)];
+
+      const freq = {};
+      lowerWords.forEach(word => {
+        freq[word] = (freq[word] || 0) + 1;
+      });
+
+      const sortedFreq = Object.entries(freq).sort((a, b) => b[1] - a[1]);
+
+      const output = `
+Total Characters: ${totalChars}
+Total Words: ${totalWords}
+Total Sentences: ${totalSentences}
+Unique Words: ${uniqueWords.length} (${uniqueWords.join(", ")})
+
+Word Frequency:
+${sortedFreq.map(([word, count]) => `${word}: ${count}`).join("\n")}
+      `.trim();
+
+      document.getElementById("output").textContent = output;
+    }
+  </script>
+
+</body>
+</html>

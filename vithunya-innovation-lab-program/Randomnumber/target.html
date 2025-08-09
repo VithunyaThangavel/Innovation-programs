@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the number game</title>
+</head>
+<body>
+    <h1>Guess the Number Game</h1>
+    <input type="number" id="guess" placeholder="Enter guess number:">
+    <button onclick="playGame()">Sumbit</button>
+    <p id="feedback"></p>
+    <p id="attempts"></p>
+    <style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #fefefe;
+        font-family: Arial, sans-serif;
+      }
+  
+      h1 {
+        color:lightpink;
+        margin-bottom: 20px;
+      }
+  
+      #guess {
+        padding: 10px;
+        font-size: 16px;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+  
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-top: 15px;
+        background-color: lightgray;
+        color: black;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+  
+      button:hover {
+        background-color:lightyellow;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+      }
+  
+      #hint {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #444;
+      }
+    </style>
+    <script>
+         let target=Math.floor(Math.random()*100);
+         let count=0;
+    function playGame() {
+        let guess=parseInt(document.getElementById("guess").value)
+        count++;
+        if(guess<target){
+            document.getElementById("feedback").innerText="Too Low"
+        }
+        else if(guess>target){
+            document.getElementById("feedback").innerText="Too High"
+        }
+        else{
+            document.getElementById("feedback").innerText="Correct"
+            document.getElementById("attempts").innerText="You guessed it in" +count + "attempts"
+        } 
+}
+    </script>
+</body>
+</html>
